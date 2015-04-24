@@ -2,7 +2,7 @@
 
 /* Services */
 
-var jghpChatServices = angular.module('jghpChatApp.services', ['ngRoute']);
+var jghpChatServices = angular.module('jghpChatApp.services', ['btford.socket-io']);
 
 jghpChatServices.factory('UsernameService',function() {
     var service = { username: "guest"};
@@ -17,4 +17,7 @@ jghpChatServices.factory('UsernameService',function() {
         }
     };
     return service;
+});
+jghpChatServices.factory('mySocket', function (socketFactory) {
+    return socketFactory();
 });

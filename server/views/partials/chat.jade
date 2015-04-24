@@ -1,1 +1,4 @@
 p This will be jghphhhf chat one day
+p(ng-repeat='message in chatMessages') {{message.username}}: {{message.text}}
+input(ng-model='newMessageText')
+button(ng-click='send(newMessageText)') Send

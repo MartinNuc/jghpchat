@@ -1,21 +1,18 @@
-
 /**
  * Module dependencies
  */
 
 var express = require('express'),
-  bodyParser = require('body-parser'),
-  methodOverride = require('method-override'),
-  errorHandler = require('errorhandler'),
-  morgan = require('morgan'),
-  routes = require('./routes'),
-  api = require('./routes/api'),
-  http = require('http'),
-  path = require('path');
-
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    errorHandler = require('errorhandler'),
+    morgan = require('morgan'),
+    routes = require('./routes'),
+    api = require('./routes/api'),
+    http = require('http'),
+    path = require('path'),
+    io = require('socket.io');
 var app = module.exports = express();
-
-
 /**
  * Configuration
  */
@@ -44,7 +41,7 @@ if (env === 'development') {
 
 // production only
 if (env === 'production') {
-  // TODO
+    // TODO
 }
 
 
@@ -62,11 +59,21 @@ app.get('/api/name', api.name);
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
-
 /**
  * Start Server
  */
 
-http.createServer(app).listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
+var server = http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+});
+
+io = io.listen(server);
+io.on('connection', function (socket) {
+    console.log('Socket connected to client.');
+
+    // logs the data that's emitted from client when they receive 'emitting'
+    socket.on('newMessage', function (data) {
+        io.sockets.emit("broadcast", data);
+        console.log(data);
+    });
 });
