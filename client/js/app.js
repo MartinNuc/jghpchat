@@ -9,7 +9,7 @@ angular.module('jghpChatApp', [
 ]).
     config(function ($routeProvider, $locationProvider) {
         $routeProvider.
-            when('/view1', {
+            when('/chat', {
                 templateUrl: 'partials/chat',
                 controller: 'ChatController'
             }).
