@@ -1,11 +1,13 @@
 'use strict';
 
-/* Controllers */
-
 angular.module('jghpChatApp.controllers', []).
-    controller('AppCtrl', function ($scope, UsernameService) {
+    controller('AppCtrl', function ($scope, UsernameService, $routeParams) {
 
-        $scope.username = UsernameService.getUsername();
+        $scope.$on('$routeChangeSuccess', function() {
+            console.log($routeParams);
+            UsernameService.setUsername($routeParams.username);
+            $scope.username = UsernameService.getUsername();
+        });
     }).
     controller('ChatController', function ($scope) {
         // write Ctrl here

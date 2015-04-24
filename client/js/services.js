@@ -4,14 +4,16 @@
 
 var jghpChatServices = angular.module('jghpChatApp.services', ['ngRoute']);
 
-jghpChatServices.factory('UsernameService',function($routeParams) {
-    var service = {};
+jghpChatServices.factory('UsernameService',function() {
+    var service = { username: "guest"};
     service.getUsername = function() {
-        var paramUsername = $routeParams.username;console.log($routeParams);
-        if (paramUsername) {
-            return paramUsername;
+        return this.username;
+    };
+    service.setUsername = function (username) {
+        if (username) {
+            this.username = username;
         } else {
-            return "guest";
+            this.username = "guest";
         }
     };
     return service;
