@@ -67,13 +67,29 @@ var server = http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
+
+var onlineUsers = [];
 io = io.listen(server);
 io.on('connection', function (socket) {
-    console.log('Socket connected to client.');
+    var username = "";
 
-    // logs the data that's emitted from client when they receive 'emitting'
-    socket.on('newMessage', function (data) {
-        io.sockets.emit("broadcast", data);
-        console.log(data);
+    socket.on('join', function (data) {
+        onlineUsers.push(data.username);
+        username = data.username;
+        io.sockets.emit("onlineUsers", onlineUsers);
+    });
+
+    socket.on('sendMessage', function (data) {
+        data.timestamp = Date.now();
+        io.sockets.emit("newMessage", data);
+    });
+
+    socket.on('disconnect', function(param) {
+        var index = onlineUsers.indexOf(username);
+        if (index > -1) {
+            onlineUsers.splice(index, 1);
+        }
+
+        io.sockets.emit("onlineUsers", onlineUsers);
     });
 });
