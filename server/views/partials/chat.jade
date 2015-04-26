@@ -1,4 +1,11 @@
-p This will be jghphhhf chat one day
-p(ng-repeat='message in chatMessages') {{message.username}}: {{message.text}}
-input(ng-model='newMessageText')
-button(ng-click='send(newMessageText)') Send
+.chatbox
+    .messages
+        .message(ng-repeat='message in chatMessages', ng-class="{mine: message.username == username}")
+            span.timestamp {{message.timestamp | date:'MM/dd/yyyy @ h:mma'}}
+            span.sender <{{message.username}}>
+            span.text {{message.text}}
+    .online-users
+        .user(ng-repeat='user in onlineUsers') {{user}}
+    .new-message
+        .nickname {{username}}:
+        input(ng-enter="send(newMessageText)",ng-model='newMessageText')
