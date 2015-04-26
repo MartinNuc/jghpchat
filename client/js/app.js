@@ -5,6 +5,7 @@
 angular.module('jghpChatApp', [
     'jghpChatApp.controllers',
     'jghpChatApp.services',
+    'jghpChatApp.directives',
     'ngRoute',
     'btford.socket-io'
 ]).
