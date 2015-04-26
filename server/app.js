@@ -8,10 +8,10 @@ var express = require('express'),
     errorHandler = require('errorhandler'),
     morgan = require('morgan'),
     routes = require('./routes'),
-    api = require('./routes/api'),
     http = require('http'),
     path = require('path'),
-    io = require('socket.io');
+    fs = require('fs');
+    mongoose = require('mongoose');
 var app = module.exports = express();
 /**
  * Configuration
@@ -49,47 +49,27 @@ if (env === 'production') {
  * Routes
  */
 
+// dynamically include routes (Controller)
+fs.readdirSync('./server/controllers').forEach(function (file) {
+    if(file.substr(-3) == '.js') {
+        route = require('./controllers/' + file);
+        route.controller(app);
+    }
+});
+
 // serve index and view partials
 app.get('/', routes.index);
 app.get(/^\/partials(.*)$/, routes.partials);
 
-// JSON API
-app.get('/api/name', api.name);
-
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
+//app.get('*', routes.index);
 
 /**
  * Start Server
  */
 
-var server = http.createServer(app).listen(app.get('port'), function () {
+app.server = http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-
-var onlineUsers = [];
-io = io.listen(server);
-io.on('connection', function (socket) {
-    var username = "";
-
-    socket.on('join', function (data) {
-        onlineUsers.push(data.username);
-        username = data.username;
-        io.sockets.emit("onlineUsers", onlineUsers);
-    });
-
-    socket.on('sendMessage', function (data) {
-        data.timestamp = Date.now();
-        io.sockets.emit("newMessage", data);
-    });
-
-    socket.on('disconnect', function(param) {
-        var index = onlineUsers.indexOf(username);
-        if (index > -1) {
-            onlineUsers.splice(index, 1);
-        }
-
-        io.sockets.emit("onlineUsers", onlineUsers);
-    });
-});
+mongoose.connect('mongodb://localhost/jghpchat');
