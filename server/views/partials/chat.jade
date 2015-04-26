@@ -1,11 +1,12 @@
 .chatbox
     .messages
         .message(ng-repeat='message in chatMessages', ng-class="{mine: message.username == username}")
-            span.timestamp {{message.timestamp | date:'MM/dd/yyyy @ h:mma'}}
+            span.timestamp {{message.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}
             span.sender <{{message.username}}>
             span.text {{message.text}}
     .online-users
-        .user(ng-repeat='user in onlineUsers') {{user}}
+        .header Online:
+        .user(ng-repeat='user in onlineUsers track by $index') {{user}}
     .new-message
         .nickname {{username}}:
         input(ng-enter="send(newMessageText)",ng-model='newMessageText')

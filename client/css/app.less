@@ -7,6 +7,8 @@
 
   .messages {
     width: 80%;
+    height: calc(~"100% - 50px");
+    overflow: auto;
     display: inline-block;
 
     .message {
@@ -35,7 +37,21 @@
     display: inline-block;
     float: right;
     background-color: #ccffcc;
-    padding: 10px
+    padding: 10px;
+    height: calc(~"100% - 50px");
+    overflow: auto;
+
+    .header {
+      padding: 5px 0px;
+    }
+    
+    .user {
+      background-image: url('/images/user.gif');
+      background-repeat: no-repeat;
+      padding-left: 20px;
+      padding-top: 0px;
+      padding-bottom: 5px;
+    }
   }
 
   .new-message {
@@ -44,6 +60,7 @@
     display: table;
     padding: 10px;
     width: 95%;
+    height: 40px;
 
     .nickname {
       display:table-cell;
