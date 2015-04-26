@@ -1,0 +1,59 @@
+.chatbox {
+  width: 95%;
+  height: 400px;
+  padding: 20px;
+  margin: auto;
+  position: relative;
+
+  .messages {
+    width: 80%;
+    display: inline-block;
+
+    .message {
+      transition: 3s ease-in-out;
+      padding: 5px 5px;
+      margin: 3px 0px;
+
+      &.mine {
+        background-color: rgba(204, 255, 204, 0.5);
+      }
+
+      .timestamo {
+        padding: 5px 3px;
+      }
+      .sender {
+        padding: 5px 5px;
+      }
+      .text {
+        padding: 5px 10px;
+      }
+    }
+  }
+
+  .online-users {
+    width: 17%;
+    display: inline-block;
+    float: right;
+    background-color: #ccffcc;
+    padding: 10px
+  }
+
+  .new-message {
+    position: absolute;
+    bottom: 0;
+    display: table;
+    padding: 10px;
+    width: 95%;
+
+    .nickname {
+      display:table-cell;
+      padding: 5px 10px;
+      width:1px
+    }
+
+    input {
+      display:table-cell;
+      width: 100%;
+    }
+  }
+}
