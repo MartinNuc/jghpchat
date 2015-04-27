@@ -13,6 +13,7 @@ angular.module('jghpChatApp.controllers', []).
         $scope.onlineUsers = [];
 
         ChatService.loadHistory().success(function(data) {
+            data.reverse();
             $scope.chatMessages = data;
         });
 
