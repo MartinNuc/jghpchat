@@ -8,9 +8,13 @@ angular.module('jghpChatApp.controllers', []).
             $scope.username = UsernameService.getUsername();
         });
     }).
-    controller('ChatController', function ($scope, mySocket) {
+    controller('ChatController', function ($scope, mySocket, ChatService) {
         $scope.chatMessages = [];
         $scope.onlineUsers = [];
+
+        ChatService.loadHistory().success(function(data) {
+            $scope.chatMessages = data;
+        });
 
         mySocket.emit("join", {username: $scope.username});
 

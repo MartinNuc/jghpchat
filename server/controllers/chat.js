@@ -1,11 +1,11 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var Message = require('../model/message');
 var io = require('socket.io');
 
 module.exports.api = function (app) {
-    app.get('/api/history', function () {
-        Message.find().exec(function (data) {
-            console.log(data);
+    app.get('/api/history', function (req, res) {
+        Message.find().exec(function (err, data) {
+            res.json(data);
         });
     });
 };
@@ -42,6 +42,10 @@ module.exports.startSocket = function (server) {
             }
 
             io.sockets.emit("onlineUsers", onlineUsers);
+        });
+
+        socket.on('error', function (err) {
+            console.error(err.stack); // TODO, cleanup
         });
     });
 };

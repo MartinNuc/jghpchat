@@ -10,4 +10,4 @@ MessageSchema.pre('save', function(next) {
 });
 var message = mongoose.model('Chat', MessageSchema);
 
-module.exports = {Message: message};
+module.exports = message;
