@@ -4,7 +4,7 @@ var io = require('socket.io');
 
 module.exports.api = function (app) {
     app.get('/api/history', function (req, res) {
-        Message.find().exec(function (err, data) {
+        Message.find().limit(50).exec(function (err, data) {
             res.json(data);
         });
     });
