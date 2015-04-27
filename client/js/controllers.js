@@ -28,8 +28,10 @@ angular.module('jghpChatApp.controllers', []).
         });
 
         $scope.send = function(message) {
-            mySocket.emit("sendMessage", {username: $scope.username, text: message});
-            $scope.newMessageText = "";
+            if (message) {
+                mySocket.emit("sendMessage", {username: $scope.username, text: message});
+                $scope.newMessageText = "";
+            }
         };
 
     });
