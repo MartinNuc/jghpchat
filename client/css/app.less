@@ -1,4 +1,12 @@
+@background: #0b6295;
+@base: #0b6295;
+
+body {
+  background: @background;
+}
+
 .chatbox {
+  background: lighten(@background, 70%);
   width: 95%;
   height: 400px;
   padding: 20px;
@@ -6,7 +14,7 @@
   position: relative;
 
   .messages {
-    width: calc(~"100% - 120px");
+    width: calc(~"100% - 130px");
     height: calc(~"100% - 50px");
     overflow: auto;
     display: inline-block;
@@ -18,7 +26,7 @@
       position: relative;
 
       &.mine {
-        background-color: rgba(204, 255, 204, 0.5);
+        background-color: lighten(@base, 60%);
       }
 
       .timestamp {
@@ -47,9 +55,10 @@
     width: 100px;
     display: inline-block;
     float: right;
-    background-color: #ccffcc;
+    background-color: lighten(@base, 50%);
     padding: 10px;
-    height: calc(~"100% - 50px");
+    height: calc(~"100% - 60px");
+    border: 1px solid darken(@background, 10%);
     overflow: auto;
 
     .header {
@@ -72,20 +81,20 @@
         left: -10px;
         opacity: 0;
       }
-      &.ng-leave {
+      &.ng-enter.ng-enter-active {
         left: 0;
         opacity: 1;
       }
-      &.ng-move {
-        opacity: 0.5;
-      }
-      &.ng-enter.ng-enter-active {
+      &.ng-leave {
         left: 0;
         opacity: 1;
       }
       &.ng-leave.ng-leave-active {
         left: -10px;
         opacity: 0;
+      }
+      &.ng-move {
+        opacity: 0.5;
       }
       &.ng-move.ng-move-active {
         opacity: 1;
