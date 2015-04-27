@@ -9,4 +9,6 @@
         .user(ng-repeat='user in onlineUsers track by $index') {{user}}
     .new-message
         .nickname {{username}}:
-        input(ng-enter="send(newMessageText)",ng-model='newMessageText')
+        .controls
+            input.new-message-text(ng-enter="send(newMessageText)",ng-model='newMessageText')
+            button.send-button(ng-click="send(newMessageText)") Send

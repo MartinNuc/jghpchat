@@ -6,7 +6,7 @@
   position: relative;
 
   .messages {
-    width: 80%;
+    width: calc(~"100% - 120px");
     height: calc(~"100% - 50px");
     overflow: auto;
     display: inline-block;
@@ -33,7 +33,7 @@
   }
 
   .online-users {
-    width: 17%;
+    width: 100px;
     display: inline-block;
     float: right;
     background-color: #ccffcc;
@@ -44,7 +44,7 @@
     .header {
       padding: 5px 0px;
     }
-    
+
     .user {
       background-image: url('/images/user.gif');
       background-repeat: no-repeat;
@@ -63,14 +63,34 @@
     height: 40px;
 
     .nickname {
-      display:table-cell;
+      display: table-cell;
       padding: 5px 10px;
-      width:1px
+      width: 1px
     }
 
-    input {
-      display:table-cell;
+    .controls {
+      display: table-cell;
       width: 100%;
+
+      .new-message-text {
+        display: inline-block;
+        width: calc(~"100% - 100px");
+      }
+
+      .send-button {
+        display: inline-block;
+        width: 80px;
+      }
     }
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media only screen and (max-width: 767px) {
+  .chatbox .online-users {
+    display: none;
+  }
+  .chatbox .messages {
+    width: 100%;
   }
 }
