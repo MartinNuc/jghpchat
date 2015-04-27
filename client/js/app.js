@@ -7,7 +7,8 @@ angular.module('jghpChatApp', [
     'jghpChatApp.services',
     'jghpChatApp.directives',
     'ngRoute',
-    'btford.socket-io'
+    'btford.socket-io',
+    'luegg.directives'
 ]).
     config(function ($routeProvider, $locationProvider) {
         $routeProvider.
