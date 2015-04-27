@@ -7,6 +7,7 @@ angular.module('jghpChatApp', [
     'jghpChatApp.services',
     'jghpChatApp.directives',
     'ngRoute',
+    'ngSanitize',
     'btford.socket-io',
     'luegg.directives'
 ]).
