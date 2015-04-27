@@ -2,15 +2,15 @@ var mongoose = require('mongoose')
 var Message = require('../model/message');
 var io = require('socket.io');
 
-module.exports.controller = function(app) {
-
-    var server = app.server;
-
-    app.get('/api/history', function() {
-        Message.find().exec(function(data) {
+module.exports.api = function (app) {
+    app.get('/api/history', function () {
+        Message.find().exec(function (data) {
             console.log(data);
         });
     });
+};
+
+module.exports.startSocket = function (server) {
 
     var onlineUsers = [];
     io = io.listen(server);
@@ -24,8 +24,7 @@ module.exports.controller = function(app) {
         });
 
         socket.on('sendMessage', function (data) {
-            data.timestamp = Date.now();
-            var message = new Chat(data);
+            var message = new Message(data);
             message.save(function (err) {
                 if (err)
                     console.log(err);
