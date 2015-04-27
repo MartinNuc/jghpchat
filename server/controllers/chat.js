@@ -30,7 +30,6 @@ module.exports.startSocket = function (server) {
                     console.log(err);
                 else {
                     io.sockets.emit("newMessage", message);
-                    console.log(message);
                 }
             });
         });
