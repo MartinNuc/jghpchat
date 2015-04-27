@@ -36,16 +36,21 @@ module.exports.startSocket = function (server) {
         });
 
         socket.on('disconnect', function (param) {
+            cleanupSocket();
+        });
+
+        socket.on('error', function (err) {
+            console.error(err.stack);
+            cleanupSocket();
+        });
+
+        function cleanupSocket() {
             var index = onlineUsers.indexOf(username);
             if (index > -1) {
                 onlineUsers.splice(index, 1);
             }
 
             io.sockets.emit("onlineUsers", onlineUsers);
-        });
-
-        socket.on('error', function (err) {
-            console.error(err.stack); // TODO, cleanup
-        });
+        }
     });
 };
