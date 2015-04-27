@@ -1,6 +1,6 @@
 .chatbox
     .messages(scroll-glue="true")
-        .message(ng-repeat='message in chatMessages', ng-class="{mine: message.username == username}")
+        .message(ng-repeat='message in chatMessages', ng-class="{mine: message.username == username}", ng-animate="'animate'")
             span.timestamp {{message.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}
             span.sender <{{message.username}}>
             span.text(ng-bind-html='message.text | linky')

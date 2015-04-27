@@ -85,11 +85,29 @@
   }
 }
 
+.animate-enter,
+.animate-leave {
+  transition: 500ms ease-in all;
+  position: relative;
+  display: block;
+}
+
+.animate-enter.animate-enter-active,
+.animate-leave {
+  left: 0;
+}
+
+.animate-leave.animate-leave-active,
+.animate-enter {
+  left: 500px;
+}
+
 /* Landscape phone to portrait tablet */
 @media only screen and (max-width: 767px) {
   .chatbox .online-users {
     display: none;
   }
+
   .chatbox .messages {
     width: 100%;
   }
