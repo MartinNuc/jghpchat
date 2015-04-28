@@ -4,6 +4,9 @@
 
 var jghpChatServices = angular.module('jghpChatApp.services', ['btford.socket-io']);
 
+/**
+ * Used to store username
+ */
 jghpChatServices.factory('UsernameService',function() {
     var service = { username: "guest"};
     service.getUsername = function() {
@@ -19,6 +22,9 @@ jghpChatServices.factory('UsernameService',function() {
     return service;
 });
 
+/**
+ * Service for server api
+ */
 jghpChatServices.factory('ChatService',function($http) {
     var service = {};
     service.loadHistory = function() {
@@ -27,6 +33,9 @@ jghpChatServices.factory('ChatService',function($http) {
     return service;
 });
 
+/**
+ * Service for Socket.io
+ */
 jghpChatServices.factory('mySocket', function (socketFactory) {
     return socketFactory();
 });

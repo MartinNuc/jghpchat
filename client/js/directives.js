@@ -1,3 +1,6 @@
+/**
+ * Action on pressed enter
+ */
 angular.module('jghpChatApp.directives', []).directive('ngEnter', function() {
     return function(scope, element, attrs) {
         element.bind("keydown keypress", function(event) {
