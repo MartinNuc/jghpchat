@@ -3,7 +3,7 @@
         .message(ng-repeat='message in chatMessages', ng-class="{mine: message.username == username}")
             span.timestamp {{::message.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}
             span.sender <{{::message.username}}>
-            span.text {{::message.text}}
+            span.text(ng-bind-html="::message.text | linky:'_new'")
     .online-users
         .header Online:
         .user(ng-repeat='user in onlineUsers track by $index') {{::user}}
